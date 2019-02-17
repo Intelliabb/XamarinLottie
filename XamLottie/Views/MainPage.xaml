@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:XamLottie" 
+             xmlns:l="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="XamLottie.Views.MainPage"
+             Title="{Binding Title}"
+             BackgroundColor="Silver">
+    <Grid x:Name="MainGrid">
+        <Frame x:Name="MainFrame" BackgroundColor="White" Margin="20" CornerRadius="10" HasShadow="false">
+            <StackLayout>
+                <ListView x:Name="MainList" 
+                          ItemsSource="{Binding Tasks}" 
+                          HasUnevenRows="true">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="8" Orientation="Horizontal">
+                                    <local:FancyCheckbox IsChecked="{Binding IsComplete}" HeightRequest="80" WidthRequest="80"/>
+                                    <Label Text="{Binding Text}" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackLayout Orientation="Horizontal" Spacing="16">
+                    <Button Text="Mark All" Clicked="All_Tapped" HorizontalOptions="FillAndExpand"/>
+                    <Button Text="Done" Clicked="Done_Tapped" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+        <Frame x:Name="PopupFrame" IsVisible="false" CornerRadius="10" Margin="30" VerticalOptions="Center">
+            <StackLayout Spacing="10">
+                <l:AnimationView x:Name="DoneAnimation" Animation="done.json" WidthRequest="150" HeightRequest="150" />
+                <Label Text="You are all done!" HorizontalTextAlignment="Center"/>
+                <Button Text="OK" Clicked="Ok_Tapped"/>
+            </StackLayout>
+        </Frame>
+    </Grid>    
+</ContentPage>
